@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/jdholdren/airblog/pkg/markdown"
 	"github.com/jdholdren/airblog/pkg/parsing"
 )
 
@@ -29,5 +30,5 @@ func main() {
 	// Make the parser
 	p := parsing.NewParser(r)
 
-	p.Run()
+	p.Run(markdown.Initial)
 }
