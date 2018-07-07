@@ -47,6 +47,14 @@ func (t ItemType) Name() string {
 		return "h2"
 	case H3:
 		return "h3"
+	case BR:
+		return "break"
+	case I:
+		return "italics"
+	case B:
+		return "bold"
+	case L:
+		return "literal"
 	default:
 		return "Unknown"
 	}
