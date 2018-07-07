@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/jdholdren/airblog/pkg/markdown"
 	"github.com/jdholdren/airblog/pkg/parsing"
@@ -30,5 +31,10 @@ func main() {
 	// Make the parser
 	p := parsing.NewParser(r)
 
+	n := time.Now()
 	p.Run(markdown.Initial)
+	t := time.Now()
+
+	fmt.Printf("Finished in %dms", (t.UnixNano()-n.UnixNano())/1000)
+	fmt.Printf("\n")
 }

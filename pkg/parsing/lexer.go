@@ -23,18 +23,13 @@ func newLexer(r io.Reader) *Lexer {
 	}
 }
 
+// Run loops over the file util it has emmitted everything possible
 func (l *Lexer) Run(init LexHandler, c chan token.Item) {
-	f := init
-
-	for {
-		f = f(l, c)
-
-		if f == nil {
-			break
-		}
+	for state := init; state != nil; {
+		state = state(l, c)
 	}
 
-	// Clear up the channel
+	// Close up the channel
 	close(c)
 }
 

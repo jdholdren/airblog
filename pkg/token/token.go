@@ -7,11 +7,14 @@ type ItemType int
 
 // The token constants
 const (
-	EOF    ItemType = iota
-	ItemH1          // H1 #
-	ItemH2          // H2 ##
-	ItemH3          // H3 ###
-	L               // Literal String
+	EOF ItemType = iota
+	H1           // H1 #
+	H2           // H2 ##
+	H3           // H3 ###
+	BR           // A line break
+	L            // Literal String
+	I            // Italics
+	B            // Bold
 )
 
 // Item is the representation of the
@@ -21,6 +24,9 @@ type Item struct {
 
 	// Value is the actual content of the token
 	Val string
+
+	// Nested are the parts of this token that have been broken out
+	Nested []Item
 }
 
 // String lets the token be output
@@ -32,13 +38,14 @@ func (i Item) String() string {
 	return fmt.Sprintf("%s: %.10s%s", i.Typ.Name(), i.Val, ending)
 }
 
+// Name gets the english version of the constant
 func (t ItemType) Name() string {
 	switch t {
-	case ItemH1:
+	case H1:
 		return "h1"
-	case ItemH2:
+	case H2:
 		return "h2"
-	case ItemH3:
+	case H3:
 		return "h3"
 	default:
 		return "Unknown"
